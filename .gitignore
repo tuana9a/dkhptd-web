@@ -107,4 +107,3 @@ dist
 .angular/
 .vscode/
 *tmp*
-/*.sh
