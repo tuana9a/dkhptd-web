@@ -16,7 +16,7 @@
       <td>Thời Gian Tạo</td>
       <td>Trạng Thái</td>
     </tr>
-    <tr *ngFor="let job of jobs" app-job-row [intervalUpdate]="true" [job]="job" [showPassword]="showPassword" [showTermId]="true" [showTimeToStart]="showTimeToStart" [showId]="showId"></tr>
+    <tr *ngFor="let job of jobs" app-job-row [intervalUpdate]="false" [job]="job" [showPassword]="showPassword" [showTermId]="true" [showTimeToStart]="showTimeToStart" [showId]="showId"></tr>
   </table>
 </div>
 <router-outlet></router-outlet>
