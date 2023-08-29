@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  baseApiUrl: "http://192.168.56.2:8080",
+  baseApiUrl: "https://dkhptd-dev.tuana9a.com",
 };
 
 /*

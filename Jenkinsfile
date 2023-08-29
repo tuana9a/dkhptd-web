@@ -19,7 +19,6 @@ pipeline {
             }
             steps {
                 script {
-                    // Build the Docker image
                     sh 'npm install'
                     sh 'npm run build:prod'
                 }
