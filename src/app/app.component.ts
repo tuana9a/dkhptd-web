@@ -30,9 +30,11 @@ export class AppComponent implements OnInit, OnDestroy {
       }
     });
     this.intervalHandler = setInterval(() => {
-      this.accountsApi.renewToken().subscribe(resNested => {
-        this.cookieUtils.set({ name: "jwt", value: resNested.data?.token });
-        this.session.authenticated(resNested.data);
+      this.accountsApi.renewToken().subscribe(res => {
+        if (res.data) {
+          this.cookieUtils.set({ name: "jwt", value: res.data.token });
+          this.session.authenticated(res.data);
+        }
       });
     }, ms(this.settings.renewTokenEvery));
   }

@@ -23,8 +23,8 @@ export class LoginComponent {
 
   login() {
     this.publicApi.login(this.username, this.password).subscribe((res) => {
-      if (res.success) {
-        this.cookieUtils.set({ name: "jwt", value: res.data?.token });
+      if (res.success && res.data) {
+        this.cookieUtils.set({ name: "jwt", value: res.data.token });
         this.session.authenticated(res.data);
         this.router.navigate(["/term-ids"]);
       }

@@ -34,27 +34,18 @@ export class CookieUtils {
    * {service instance}.setCookie({name:'userName',value:'John Doe', secure:true }); <- If page is not https then secure will not apply
    * {service instance}.setCookie({name:'niceCar', value:'red', expireDays:10 }); <- For all this examples if path is not provided default will be root
    */
-  public set(params: { name?: string; expireDays?: number; value?: string, session?: boolean, path?: string; secure?: boolean, httpOnly?: boolean }) {
+  public set(params: { name: string; value: string, expireDays?: number; domain?: string, session?: boolean, path?: string; secure?: boolean, httpOnly?: boolean }) {
     const d: Date = new Date();
     d.setTime(
       d.getTime() +
       (params.expireDays ? params.expireDays : 1) * 24 * 60 * 60 * 1000
     );
     document.cookie =
-      (params.name ? params.name : "") +
-      "=" +
-      (params.value ? params.value : "") +
-      ";" +
-      (params.session && params.session == true
-        ? ""
-        : "expires=" + d.toUTCString() + ";") +
-      "path=" +
-      (params.path && params.path.length > 0 ? params.path : "/") +
-      ";" +
-      (location.protocol === "https:" && params.secure && params.secure == true
-        ? "secure"
-        : "") +
-      ";" +
+      params.name + "=" + params.value + ";" +
+      (params.session && params.session == true ? "" : "expires=" + d.toUTCString() + ";") +
+      "domain=" + (params.domain ? params.domain : window.location.hostname) + ";" +
+      "path=" + (params.path && params.path.length > 0 ? params.path : "/") + ";" +
+      (location.protocol === "https:" && params.secure && params.secure == true ? "secure" : "") + ";" +
       (params.httpOnly && params.httpOnly == true ? "httpOnly" : ""); //But if a cookie is httpOnly, then document.cookie doesn’t see it, so it is protected.
   }
 }
