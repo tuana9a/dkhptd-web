@@ -24,8 +24,13 @@ export class LoginComponent {
   login() {
     this.publicApi.login(this.username, this.password).subscribe((res) => {
       if (res.success && res.data) {
-        this.cookieUtils.delete("jwt");
-        this.cookieUtils.set({ name: "jwt", value: res.data.token });
+        // delete old cookie that so annoying
+        this.cookieUtils.delete("jwt", { domain: "tuana9a.com" });
+        this.cookieUtils.delete("jwt", { domain: "dkhptd.tuana9a.com" });
+        this.cookieUtils.delete("jwt", { domain: ".tuana9a.com" });
+        this.cookieUtils.delete("jwt", { domain: ".dkhptd.tuana9a.com" });
+        // then I set new one here
+        this.cookieUtils.set("jwt", res.data.token);
         this.session.authenticated(res.data);
         this.router.navigate(["/term-ids"]);
       }
